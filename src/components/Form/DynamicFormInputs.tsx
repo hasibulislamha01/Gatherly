@@ -8,7 +8,7 @@ type FormValues = {
 
 export default function DynamicFormInputs({ data }: { data: InputField[] }) {
 
-    const { handleSubmit, register, reset } = useForm()
+    const { handleSubmit, register, reset } = useForm<FormValues>()
     const onSubmit = (formData: FormValues) => {
         console.log("submitted data: ", formData)
         reset()
