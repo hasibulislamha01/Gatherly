@@ -2,29 +2,39 @@
 import { Button } from 'antd'
 import React, { useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
-import { addInput } from '@/utilities/formData'
 
-export default function AddInput({data}) {
+
+interface InputType {
+    inputName: string,
+    type: string,
+}
+
+interface AddInputProps {
+    addInput: (newInputdata: InputType) => void;
+}
+
+export default function AddInput({ addInput }: AddInputProps) {
+
     const [addNewInput, setAddNewInput] = useState(false)
 
-    interface InputType {
-        inputName: string,
-        type: string,
-    }
-
-    const { control, handleSubmit, register } = useForm<InputType>()
-    const submit: SubmitHandler<InputType> = (data) => {
-        addInput(data)
+    const { handleSubmit, register, reset } = useForm<InputType>()
+    const submit: SubmitHandler<InputType> = (newInputdata) => {
+        addInput(newInputdata)
+        reset()
     }
     return (
-        <section>
-            <Button type="primary" onClick={() => setAddNewInput(true)}>Add Input</Button>
+        <section className='space-y-4'>
+            <button 
+            className='w-full mt-3 bg-slate-600 hover:bg-slate-700 active:bg-slate-800 text-white py-1 px-3 rounded-md transition-all duration-200'
+            onClick={() => setAddNewInput(true)}
+            >Add Input</button>
             {
                 addNewInput &&
-                <>
+                < div className='bg-white space-y-4 py-12 px-10 rounded-lg shadow-lg'>
+                    <h4>Enter Field Details</h4>
                     <form
                         onSubmit={handleSubmit(submit)}
-                        className='flex flex-col gap-2'
+                        className='flex flex-col gap-4'
                     >
                         <input
                             className='py-1 px-2 rounded-lg border border-gray-300 outline-2'
@@ -47,7 +57,7 @@ export default function AddInput({data}) {
                     <button
                         className='w-full mt-3 bg-red-600 text-white py-1 px-3 rounded-md'
                         onClick={() => { setAddNewInput(false) }}>Cancel</button>
-                </>
+                </div>
 
             }
         </section>

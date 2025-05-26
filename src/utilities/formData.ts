@@ -4,10 +4,6 @@ type InputField = {
     type: string;
 }
 
-interface InputType {
-    inputName: string,
-    type: string,
-}
 
 
 
@@ -29,12 +25,7 @@ const data: InputField[] = [
     },
 ]
 
-function addInput(inputDetails: InputType) {
-    const newId = data.length + 1
-    const newInput = {id: newId, ...inputDetails }
-    console.log('adding item', newInput)
-    data?.push(newInput)
-}
 
-export  {data, addInput}
-export type {InputField}
+
+export { data }
+export type { InputField }
