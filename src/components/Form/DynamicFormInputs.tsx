@@ -1,6 +1,6 @@
 import React from 'react'
 import { InputField } from '@/utilities/formData'
-import { useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
 
 type FormValues = {
     [key: string]: string;
@@ -9,7 +9,7 @@ type FormValues = {
 export default function DynamicFormInputs({ data }: { data: InputField[] }) {
 
     const { handleSubmit, register, reset } = useForm<FormValues>()
-    const onSubmit = (formData: FormValues) => {
+    const onSubmit : SubmitHandler<FormValues> = (formData: FormValues) => {
         console.log("submitted data: ", formData)
         reset()
 
