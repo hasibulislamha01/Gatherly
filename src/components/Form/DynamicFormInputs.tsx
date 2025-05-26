@@ -2,11 +2,14 @@ import React from 'react'
 import { InputField } from '@/utilities/formData'
 import { useForm } from 'react-hook-form'
 
+
+
 export default function DynamicFormInputs({ data }: { data: InputField[] }) {
-    // console.log(data)
-    const { handleSubmit, register } = useForm()
+    
+    const { handleSubmit, register, reset, formState: { errors }, } = useForm()
     const onSubmit = (formData) => {
-        console.log(formData)
+        console.log("submitted data: ", formData)
+        reset()
         
     }
     return (
@@ -18,9 +21,9 @@ export default function DynamicFormInputs({ data }: { data: InputField[] }) {
                     {
                         data?.map(item =>
                             <div key={item.id} className='flex flex-col items-start gap-1'>
-                                <label className='text-sm'>Type Your {item.inputName} here</label>
+                                <label className='text-sm'>Enter Your {item.inputName} here</label>
                                 <input
-                                    {...register(item?.inputName, {required: 'Please fill up the field'})}
+                                    {...register(item?.inputName, {required: true})}
                                     className='py-1 px-2 rounded-lg border border-gray-300 outline-2'
 
                                     placeholder={`Enter ${item.inputName}`}
@@ -31,7 +34,7 @@ export default function DynamicFormInputs({ data }: { data: InputField[] }) {
                     }
                 </div>
                 <button
-                    className='mt-6 w-full  bg-slate-800 text-white py-1 px-3 rounded-md'
+                    className='mt-6 w-full  bg-slate-800 text-white py-1 px-3 rounded-md active:bg-slate-500 transition-all duration-200'
                     type='submit'>Submit Form</button>
             </form>
         </section>

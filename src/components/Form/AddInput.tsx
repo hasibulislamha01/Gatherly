@@ -30,7 +30,7 @@ export default function AddInput({ addInput }: AddInputProps) {
             {
                 addNewInput &&
                 < div className='bg-white space-y-4 py-12 px-10 rounded-lg shadow-lg'>
-                    <h4>Enter Field Details</h4>
+                    <h4 className='font-semibold'>Enter Field Details</h4>
                     <form
                         onSubmit={handleSubmit(submit)}
                         className='flex flex-col gap-4'
@@ -49,6 +49,7 @@ export default function AddInput({ addInput }: AddInputProps) {
                             <option value="radio">Bullet Point</option>
                             <option value="password">password</option>
                             <option value="checkbox">checkbox</option>
+                            <option value="email">email</option>
                         </select>
 
 

@@ -17,18 +17,24 @@ export default function Form() {
     const [inputData, setInputData] = useState<InputField[]>(data)
 
     function addInput(newInputDetails: InputType) {
-        console.log(inputData, newInputDetails)
+        
         const newId = inputData.length + 1
-        const newInput = { id: newId, ...newInputDetails }
-        console.log('adding item', newInput)
-        setInputData([...inputData, newInput])
+        const isNameExisting = inputData.find(item => item.inputName === newInputDetails.inputName)
+
+        if (isNameExisting) {
+            alert('input name is already existing:')
+            return
+        } else {
+            const newInput = { id: newId, ...newInputDetails }
+            console.log('adding item', newInput)
+            setInputData([...inputData, newInput])
+        }
     }
 
     console.log('current inputs are: ', inputData)
     return (
         <section className='w-full flex flex-col md:flex-row items-center justify-center gap-10'>
-
-            <AddInput addInput={addInput}/>
+            <AddInput addInput={addInput} />
             <DynamicFormInputs data={inputData} />
         </section>
     )
