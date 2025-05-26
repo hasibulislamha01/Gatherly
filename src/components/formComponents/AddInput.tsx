@@ -1,5 +1,4 @@
 "use client"
-import { Button } from 'antd'
 import React, { useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 
@@ -47,7 +46,9 @@ export default function AddInput({ addInput }: AddInputProps) {
                         >
                             <option value="text">Text</option>
                             <option value="number">Number</option>
-                            <option value="bullet">Bullet Point</option>
+                            <option value="radio">Bullet Point</option>
+                            <option value="password">password</option>
+                            <option value="checkbox">checkbox</option>
                         </select>
 
 
