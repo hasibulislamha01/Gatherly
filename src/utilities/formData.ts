@@ -10,12 +10,12 @@ type InputField = {
 const data: InputField[] = [
     {
         id: 1,
-        inputName: 'Name',
+        inputName: 'name',
         type: 'text',
     },
     {
         id: 2,
-        inputName: 'Email',
+        inputName: 'email',
         type: 'email',
     },
     {
