@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form'
 
 export default function DynamicFormInputs({ data }: { data: InputField[] }) {
     
-    const { handleSubmit, register, reset, formState: { errors }, } = useForm()
+    const { handleSubmit, register, reset, } = useForm()
     const onSubmit = (formData) => {
         console.log("submitted data: ", formData)
         reset()

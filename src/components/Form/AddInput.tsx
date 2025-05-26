@@ -12,6 +12,20 @@ interface AddInputProps {
     addInput: (newInputdata: InputType) => void;
 }
 
+interface DropDownTypes {
+    value: string,
+    placeholder: string
+}
+
+const dropDownOptions: DropDownTypes[] = [
+    { value: 'text', placeholder: 'Text' },
+    { value: 'number', placeholder: 'Number' },
+    { value: 'radio', placeholder: 'Radio' },
+    { value: 'password', placeholder: 'Password' },
+    { value: 'email', placeholder: 'Email' },
+    { value: 'checkbox', placeholder: 'Checkbox' },
+]
+
 export default function AddInput({ addInput }: AddInputProps) {
 
     const [addNewInput, setAddNewInput] = useState(false)
@@ -23,9 +37,9 @@ export default function AddInput({ addInput }: AddInputProps) {
     }
     return (
         <section className='space-y-4'>
-            <button 
-            className='w-full mt-3 bg-slate-600 hover:bg-slate-700 active:bg-slate-800 text-white py-1 px-3 rounded-md transition-all duration-200'
-            onClick={() => setAddNewInput(true)}
+            <button
+                className='w-full mt-3 bg-slate-600 hover:bg-slate-700 active:bg-slate-800 text-white py-1 px-3 rounded-md transition-all duration-200'
+                onClick={() => setAddNewInput(true)}
             >Add Input</button>
             {
                 addNewInput &&
@@ -44,12 +58,12 @@ export default function AddInput({ addInput }: AddInputProps) {
                             className='py-1 px-2 rounded-lg border border-gray-300 outline-2'
                             {...register('type', { required: true })}
                         >
-                            <option value="text">Text</option>
-                            <option value="number">Number</option>
-                            <option value="radio">Bullet Point</option>
-                            <option value="password">password</option>
-                            <option value="checkbox">checkbox</option>
-                            <option value="email">email</option>
+                            {
+                                dropDownOptions.map((item, index) =>
+
+                                    <option key={index} value={item.value}>{item.placeholder}</option>
+                                )
+                            }
                         </select>
 
 
