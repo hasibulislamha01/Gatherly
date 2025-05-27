@@ -29,12 +29,15 @@ const dropDownOptions: DropDownTypes[] = [
 export default function AddInput({ addInput }: AddInputProps) {
 
     const [addNewInput, setAddNewInput] = useState(false)
+    const [selectedOption, setSelectedOption] = useState('')
+    const [options, setOptions] = useState(false)
 
     const { handleSubmit, register, reset } = useForm<InputType>()
     const submit: SubmitHandler<InputType> = (newInputdata) => {
         addInput(newInputdata)
         reset()
     }
+
     return (
         <section className='space-y-4'>
             <button
@@ -52,19 +55,41 @@ export default function AddInput({ addInput }: AddInputProps) {
                         <input
                             className='py-1 px-2 rounded-lg border border-gray-300 outline-2'
                             placeholder='Enter Input Name'
-                            {...register("inputName", { required: true, maxLength: 20 })} />
+                            {...register("inputName", { required: true, maxLength: 20 })}
+                        />
 
                         <select
                             className='py-1 px-2 rounded-lg border border-gray-300 outline-2'
                             {...register('type', { required: true })}
+
+                            onChange={(e) => { setSelectedOption(e.target.value) }}
                         >
                             {
                                 dropDownOptions.map((item, index) =>
 
-                                    <option key={index} value={item.value}>{item.placeholder}</option>
+                                    <option
+                                        key={index}
+                                        value={item.value}>
+                                        {item.placeholder}
+                                    </option>
                                 )
                             }
                         </select>
+
+                        {
+                            (selectedOption === 'radio' || selectedOption === 'checkbox') &&
+                            <div className='flex flex-col gap-2'>
+                                <label>Number of options</label>
+                                <div className='flex gap-3'>
+                                    <input
+                                        className='py-1 px-2 rounded-lg border border-gray-300 outline-2'
+                                        type="number"
+                                        placeholder='Options count'
+                                    />
+                                    <button className='bg-slate-700 active:bg-slate-800 text-white py-1 px-3 rounded-md transition-all duration-200'>Set</button>
+                                </div>
+                            </div>
+                        }
 
 
                         <button
