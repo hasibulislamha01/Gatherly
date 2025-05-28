@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
-import { IoIosAddCircleOutline } from "react-icons/io";
+import { IoIosAddCircleOutline, IoIosCloseCircleOutline } from "react-icons/io";
 
 interface InputType {
     inputName: string,
@@ -30,8 +30,14 @@ export default function AddInput({ addInput }: AddInputProps) {
 
     const [addNewInput, setAddNewInput] = useState(false)
     const [selectedOption, setSelectedOption] = useState('')
-    const [optionsCount, setOptionsCount] = useState(2)
-    const arrOfOptionsCount = Array.from({ length: optionsCount })
+    const [optionsCountArr, setOptionsCountArr] = useState(['', ''])
+    const addOption = () => {
+        setOptionsCountArr(prevOptions => [...prevOptions, ''])
+    }
+    const removeOption = (index: number) => {
+        console.log(index)
+        setOptionsCountArr(prev => prev.filter((_, i)=> i !== index))
+    }
 
 
     const { handleSubmit, register, reset } = useForm<InputType>()
@@ -83,21 +89,25 @@ export default function AddInput({ addInput }: AddInputProps) {
                             <div className='flex flex-col gap-2'>
                                 <label>Enter options</label>
                                 {
-                                    arrOfOptionsCount.map((item, index) => {
+                                    optionsCountArr.map((item, index) => {
                                         return (
-                                            <input
-                                                key={index}
-                                                type="text"
-                                                placeholder={`Option ${index + 1}
+                                            <div key={index} className='flex items-center gap-2'>
+                                                <input
+                                                    type="text"
+                                                    placeholder={`Option ${index + 1}
                                                 `}
-                                                className='py-1 px-2 rounded-lg border border-gray-300 outline-2'
-                                            />
+                                                    className='py-1 px-2 rounded-lg border border-gray-300 outline-2 w-[85%]'
+                                                />
+                                                <IoIosCloseCircleOutline
+                                                    onClick={() => removeOption(index)}
+                                                    size={20} className='cursor-pointer ' />
+                                            </div>
                                         )
                                     })
                                 }
                                 <button
                                     type='button'
-                                    onClick={() => setOptionsCount(prevCount => prevCount + 1)}
+                                    onClick={addOption}
                                     className='flex items-center justify-center gap-3 bg-slate-200 py-1 px-3 rounded-lg active:bg-slate-400 transition-all duration-200 hover:bg-zinc-300'>
                                     <p>Add Option</p>
                                     <IoIosAddCircleOutline size={20} />
