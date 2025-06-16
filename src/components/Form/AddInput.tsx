@@ -1,15 +1,26 @@
 "use client"
 import React, { useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
-import { IoIosAddCircleOutline, IoIosCloseCircleOutline } from "react-icons/io";
+import OptionsHandler from '../OptionsHandler/OptionsHandler';
+import { Dispatch, SetStateAction } from "react";
+
+interface OptionsType {
+    id: number,
+    optionName: string,
+    value: string
+}
 
 interface InputType {
     inputName: string,
     type: string,
+    options?: OptionsType[]
 }
+
 
 interface AddInputProps {
     addInput: (newInputdata: InputType) => void;
+    options: OptionsType[];
+    setOptions: Dispatch<SetStateAction<OptionsType[]>>;
 }
 
 interface DropDownTypes {
@@ -26,18 +37,11 @@ const dropDownOptions: DropDownTypes[] = [
     { value: 'checkbox', placeholder: 'Checkbox' },
 ]
 
-export default function AddInput({ addInput }: AddInputProps) {
+export default function AddInput({ addInput, options, setOptions }: AddInputProps) {
 
     const [addNewInput, setAddNewInput] = useState(false)
     const [selectedOption, setSelectedOption] = useState('')
-    const [optionsCountArr, setOptionsCountArr] = useState(['', ''])
-    const addOption = () => {
-        setOptionsCountArr(prevOptions => [...prevOptions, ''])
-    }
-    const removeOption = (index: number) => {
-        console.log(index)
-        setOptionsCountArr(prev => prev.filter((_, i)=> i !== index))
-    }
+
 
 
     const { handleSubmit, register, reset } = useForm<InputType>()
@@ -45,6 +49,9 @@ export default function AddInput({ addInput }: AddInputProps) {
         addInput(newInputdata)
         reset()
     }
+
+
+
 
     return (
         <section className='space-y-4'>
@@ -86,33 +93,11 @@ export default function AddInput({ addInput }: AddInputProps) {
 
                         {
                             (selectedOption === 'radio' || selectedOption === 'checkbox') &&
-                            <div className='flex flex-col gap-2'>
-                                <label>Enter options</label>
-                                {
-                                    optionsCountArr.map((item, index) => {
-                                        return (
-                                            <div key={index} className='flex items-center gap-2'>
-                                                <input
-                                                    type="text"
-                                                    placeholder={`Option ${index + 1}
-                                                `}
-                                                    className='py-1 px-2 rounded-lg border border-gray-300 outline-2 w-[85%]'
-                                                />
-                                                <IoIosCloseCircleOutline
-                                                    onClick={() => removeOption(index)}
-                                                    size={20} className='cursor-pointer ' />
-                                            </div>
-                                        )
-                                    })
-                                }
-                                <button
-                                    type='button'
-                                    onClick={addOption}
-                                    className='flex items-center justify-center gap-3 bg-slate-200 py-1 px-3 rounded-lg active:bg-slate-400 transition-all duration-200 hover:bg-zinc-300'>
-                                    <p>Add Option</p>
-                                    <IoIosAddCircleOutline size={20} />
-                                </button>
-                            </div>
+                            <OptionsHandler
+                                // finalizeOptions={addOptions}
+                                options={options}
+                                setOptions={setOptions}
+                            />
                         }
 
 

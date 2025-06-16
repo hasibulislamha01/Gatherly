@@ -11,10 +11,17 @@ interface InputType {
     type: string,
 }
 
+interface OptionsType {
+    id: number,
+    optionName: string,
+    value: string
+}
 
 export default function Form() {
 
     const [inputData, setInputData] = useState<InputField[]>(data)
+    const [options, setOptions] = useState<OptionsType[]>([])
+    console.log(options)
 
     function addInput(newInputDetails: InputType) {
         
@@ -25,7 +32,7 @@ export default function Form() {
             alert('input name is already existing:')
             return
         } else {
-            const newInput = { id: newId, ...newInputDetails }
+            const newInput = { id: newId, ...newInputDetails, options }
             console.log('adding item', newInput)
             setInputData([...inputData, newInput])
         }
@@ -34,7 +41,7 @@ export default function Form() {
     console.log('current inputs are: ', inputData)
     return (
         <section className='w-full flex flex-col md:flex-row items-center justify-center gap-10'>
-            <AddInput addInput={addInput} />
+            <AddInput addInput={addInput} options={options} setOptions={setOptions} />
             <DynamicFormInputs data={inputData} />
         </section>
     )

@@ -1,7 +1,14 @@
+interface OptionsType {
+    id: number,
+    optionName: string,
+    value: string
+}
+
 type InputField = {
     readonly id: number;
     inputName: string;
     type: string;
+    options?: OptionsType[]
 }
 
 
