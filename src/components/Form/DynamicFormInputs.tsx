@@ -21,7 +21,6 @@ export default function DynamicFormInputs({ data, handleDeleteField }: DynamicFo
         const jsonData = JSON.stringify(formData)
         alert(jsonData)
         reset()
-
     }
 
     console.log('form data are : ', data)

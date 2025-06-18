@@ -20,7 +20,7 @@ export default function OptionsHandler({ options, setOptions }: OptionsHandlerPr
         setOptionsCountArr(prevOptions => [...prevOptions, ''])
     }
     const removeOption = (index: number) => {
-        console.log(index)
+        // console.log(index)
         setOptionsCountArr(prev => prev.filter((_, i) => i !== index))
     }
 

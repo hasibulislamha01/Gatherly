@@ -22,7 +22,7 @@ export default function Form() {
 
     const [inputData, setInputData] = useState<InputField[]>(data)
     const [options, setOptions] = useState<OptionsType[]>([])
-    console.log(options)
+    // console.log(options)
 
     function addInput(newInputDetails: InputType) {
 
