@@ -18,6 +18,8 @@ export default function DynamicFormInputs({ data, handleDeleteField }: DynamicFo
     const { handleSubmit, register, reset } = useForm<FormValues>()
     const onSubmit: SubmitHandler<FormValues> = (formData: FormValues) => {
         console.log("submitted data: ", formData)
+        const jsonData = JSON.stringify(formData)
+        alert(jsonData)
         reset()
 
     }
@@ -42,6 +44,7 @@ export default function DynamicFormInputs({ data, handleDeleteField }: DynamicFo
                                                         {...register(item?.inputName, { required: true })}
                                                         type={item.type}
                                                         name={item.inputName}
+                                                        value={option.value}
                                                     />
                                                     <span>{option.value}</span>
                                                 </div>
