@@ -22,7 +22,7 @@ export default function DynamicFormInputs({ data, handleDeleteField }: DynamicFo
 
     }
 
-    console.log('form data are : ',data)
+    console.log('form data are : ', data)
     return (
         <section className='bg-white px-12 py-10  rounded-lg shadow-lg'>
             <h4 className='font-bold text-lg mb-8'>Fill the form</h4>
@@ -38,7 +38,12 @@ export default function DynamicFormInputs({ data, handleDeleteField }: DynamicFo
                                         <section className='w-full flex items-center gap-4 flex-wrap'>
                                             {item.options?.map(option =>
                                                 <div key={option.id} className='flex items-center gap-1'>
-                                                    <input type={item.type} name={item.inputName} /> <span>{option.value}</span>
+                                                    <input
+                                                        {...register(item?.inputName, { required: true })}
+                                                        type={item.type}
+                                                        name={item.inputName}
+                                                    />
+                                                    <span>{option.value}</span>
                                                 </div>
                                             )}
                                             <IoIosCloseCircleOutline size={20} className='opacity-0 group-hover:opacity-90 cursor-pointer absolute top-[30%] right-[3%]'

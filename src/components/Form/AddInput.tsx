@@ -22,7 +22,7 @@ interface AddInputProps {
     options: OptionsType[];
     setOptions: Dispatch<SetStateAction<OptionsType[]>>;
 }
-
+ 
 interface DropDownTypes {
     value: string,
     placeholder: string

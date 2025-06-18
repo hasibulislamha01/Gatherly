@@ -12,7 +12,19 @@ type InputField = {
 }
 
 
+interface DropDownTypes {
+    value: string,
+    placeholder: string
+}
 
+const dropDownOptions: DropDownTypes[] = [
+    { value: 'text', placeholder: 'Text' },
+    { value: 'number', placeholder: 'Number' },
+    { value: 'radio', placeholder: 'Radio' },
+    { value: 'password', placeholder: 'Password' },
+    { value: 'email', placeholder: 'Email' },
+    { value: 'checkbox', placeholder: 'Checkbox' },
+]
 
 const data: InputField[] = [
     {
@@ -34,5 +46,5 @@ const data: InputField[] = [
 
 
 
-export { data }
+export { data, dropDownOptions }
 export type { InputField }

@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react'
 import { IoIosAddCircleOutline, IoIosCloseCircleOutline } from "react-icons/io";
 
@@ -7,7 +8,11 @@ interface OptionsType {
     optionName: string,
     value: string
 }
-export default function OptionsHandler({ options, setOptions }) {
+type OptionsHandlerPropTypes = {
+    options: OptionsType[],
+    setOptions: (value: React.SetStateAction<OptionsType[]>) => void
+}
+export default function OptionsHandler({ options, setOptions }: OptionsHandlerPropTypes) {
 
     const [optionsCountArr, setOptionsCountArr] = useState(['', ''])
 
@@ -19,7 +24,7 @@ export default function OptionsHandler({ options, setOptions }) {
         setOptionsCountArr(prev => prev.filter((_, i) => i !== index))
     }
 
-    const handleUpdateOptions = (e, index: number) => {
+    const handleUpdateOptions = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
         const value: string = e.target.value
         if (value === '') {
             return
