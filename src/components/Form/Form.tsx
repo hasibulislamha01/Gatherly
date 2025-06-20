@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from 'react'
-import { data } from '@/utilities/formData'
+import { data, OptionsType } from '@/utilities/formData'
 import { InputField } from '@/utilities/formData'
 import AddInput from './AddInput'
 import DynamicFormInputs from './DynamicFormInputs'
@@ -12,11 +12,6 @@ interface InputType {
     options?: OptionsType[]
 }
 
-interface OptionsType {
-    id: number,
-    optionName: string,
-    value: string
-}
 
 export default function Form() {
 
@@ -53,8 +48,15 @@ export default function Form() {
 
     return (
         <section className='w-full flex flex-col md:flex-row items-center justify-center gap-10'>
-            <AddInput addInput={addInput} options={options} setOptions={setOptions} />
-            <DynamicFormInputs data={inputData} handleDeleteField={handleDeleteField} />
+            <AddInput
+                addInput={addInput}
+                options={options}
+                setOptions={setOptions}
+            />
+            <DynamicFormInputs
+                data={inputData}
+                handleDeleteField={handleDeleteField}
+            />
         </section>
     )
 }

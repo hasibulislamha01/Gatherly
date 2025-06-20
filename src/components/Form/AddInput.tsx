@@ -3,12 +3,7 @@ import React, { useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import OptionsHandler from '../OptionsHandler/OptionsHandler';
 import { Dispatch, SetStateAction } from "react";
-
-interface OptionsType {
-    id: number,
-    optionName: string,
-    value: string
-}
+import { dropDownOptions, OptionsType } from '@/utilities/formData';
 
 interface InputType {
     inputName: string,
@@ -23,19 +18,7 @@ interface AddInputProps {
     setOptions: Dispatch<SetStateAction<OptionsType[]>>;
 }
  
-interface DropDownTypes {
-    value: string,
-    placeholder: string
-}
 
-const dropDownOptions: DropDownTypes[] = [
-    { value: 'text', placeholder: 'Text' },
-    { value: 'number', placeholder: 'Number' },
-    { value: 'radio', placeholder: 'Radio' },
-    { value: 'password', placeholder: 'Password' },
-    { value: 'email', placeholder: 'Email' },
-    { value: 'checkbox', placeholder: 'Checkbox' },
-]
 
 export default function AddInput({ addInput, options, setOptions }: AddInputProps) {
 
@@ -81,7 +64,6 @@ export default function AddInput({ addInput, options, setOptions }: AddInputProp
                         >
                             {
                                 dropDownOptions.map((item, index) =>
-
                                     <option
                                         key={index}
                                         value={item.value}>
