@@ -1,13 +1,10 @@
 
+import { OptionsType } from '@/utilities/formData';
 import React, { useState } from 'react'
 import { IoIosAddCircleOutline, IoIosCloseCircleOutline } from "react-icons/io";
 
 
-interface OptionsType {
-    id: number,
-    optionName: string,
-    value: string
-}
+
 type OptionsHandlerPropTypes = {
     options: OptionsType[],
     setOptions: (value: React.SetStateAction<OptionsType[]>) => void

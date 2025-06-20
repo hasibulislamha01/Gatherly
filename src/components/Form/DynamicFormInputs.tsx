@@ -9,7 +9,7 @@ type FormValues = {
 
 type DynamicFormInputsProps = {
     data: InputField[];
-    handleDeleteField: (id: number) => void; // ← Add the function type here
+    handleDeleteField: (id: number) => void;
 };
 
 

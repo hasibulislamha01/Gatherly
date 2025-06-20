@@ -47,4 +47,4 @@ const data: InputField[] = [
 
 
 export { data, dropDownOptions }
-export type { InputField }
+export type { InputField, OptionsType }
