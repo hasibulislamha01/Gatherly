@@ -2,16 +2,16 @@ import React from 'react'
 import { AiOutlineDelete } from 'react-icons/ai'
 
 type NewActiveInputProps = {
-    newActiveInput: boolean,
+    variant: string,
     setNewActiveInput: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export default function DynamicForm({ newActiveInput, setNewActiveInput }: NewActiveInputProps) {
+export default function DynamicForm({ variant, setNewActiveInput }: NewActiveInputProps) {
     return (
         <section>
             <h3>Form title</h3>
             {
-                newActiveInput &&
+                variant === 'text' &&
                 <div className='flex items-center gap-2'>
                     <input
                         placeholder='input'
@@ -23,6 +23,15 @@ export default function DynamicForm({ newActiveInput, setNewActiveInput }: NewAc
                     '/>
                 </div>
             }
-        </section>
+            {
+                variant === 'radio' || variant === 'checkbox' &&
+                <div>
+                    <input type={variant} name='radio' value={variant} /> one
+                    <input type={variant} name='radio' value={variant} /> two
+                </div>
+
+
+            }
+        </section >
     )
 }
